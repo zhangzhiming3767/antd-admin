@@ -54,9 +54,7 @@ export default modelExtend(pageModel, {
       }
     },
     *getUserList({ payload }, { call, put }) {
-      debugger
       const data = yield call(getUserList, payload);
-      debugger
     },
     *delete({ payload }, { call, put, select }) {
       const data = yield call(removeUser, { id: payload })

@@ -39,7 +39,6 @@ export default modelExtend(pageModel, {
   effects: {
     *getUserList({ payload }, { call, put }) {
       const data = yield call(getUserList, payload);
-      debugger
       // if (data) {
       //   yield put({
       //     type: 'querySuccess',

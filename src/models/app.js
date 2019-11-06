@@ -89,28 +89,8 @@ export default {
         const { list } = yield call(queryRouteList)
         const { code, datas: test }= yield call(getMenuList);
         let routeList = transferRoutes(test);
-        debugger
-        // const { permissions } = user
         let permissions={};
         permissions.visit = transferRoutes(test).map(item => item.id);
-        // let routeList = list
-        // if (
-        //   permissions.role === ROLE_TYPE.ADMIN ||
-        //   permissions.role === ROLE_TYPE.DEVELOPER
-        // ) {
-        //   permissions.visit = list.map(item => item.id)
-        // } else {
-        //   routeList = list.filter(item => {
-        //     const cases = [
-        //       permissions.visit.includes(item.id),
-        //       item.mpid
-        //         ? permissions.visit.includes(item.mpid) || item.mpid === '-1'
-        //         : true,
-        //       item.bpid ? permissions.visit.includes(item.bpid) : true,
-        //     ]
-        //     return cases.every(_ => _)
-        //   })
-        // }
         store.set('routeList', routeList)
         store.set('permissions', permissions)
         store.set('user', user)
