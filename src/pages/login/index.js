@@ -6,7 +6,7 @@ import { GlobalFooter } from 'ant-design-pro'
 import { Trans, withI18n } from '@lingui/react'
 import { setLocale } from 'utils'
 import config from 'utils/config'
-
+import store from 'store'
 import styles from './index.less'
 const FormItem = Form.Item
 
@@ -21,7 +21,15 @@ class Login extends PureComponent {
       if (errors) {
         return
       }
-      dispatch({ type: 'login/login', payload: values })
+      store.set('user',user);
+      dispatch({ type: 'login/login', payload: values,
+      callback: (res) => {
+        if(res && res.code=='1'){
+          store.set('user',res.datas);
+        }else{
+          //做全局统一异常处理
+        }
+      } })
     })
   }
 
@@ -58,7 +66,7 @@ class Login extends PureComponent {
           </div>
           <form>
             <FormItem hasFeedback>
-              {getFieldDecorator('username', {
+              {getFieldDecorator('loginName', {
                 rules: [
                   {
                     required: true,
@@ -67,7 +75,7 @@ class Login extends PureComponent {
               })(
                 <Input
                   onPressEnter={this.handleOk}
-                  placeholder={i18n.t`Username`}
+                  placeholder={i18n.t`loginName`}
                 />
               )}
             </FormItem>

@@ -84,8 +84,9 @@ export default {
         return
       }
       const { locationPathname } = yield select(_ => _.app)
-      const { success, user } = yield call(queryUserInfo, payload)
-      if (success && user) {
+      // const { code, datas: user} = yield call(queryUserInfo, payload)
+      let user=store.get('user');
+      if (user) {
         const { list } = yield call(queryRouteList)
         const { code, datas: test }= yield call(getMenuList);
         let routeList = transferRoutes(test);

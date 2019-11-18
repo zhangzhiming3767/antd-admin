@@ -9,21 +9,32 @@ export default {
   state: {},
 
   effects: {
-    *login({ payload }, { put, call, select }) {
+    *login({ payload,callback }, { put, call, select }) {
       const data = yield call(loginUser, payload)
-      const { locationQuery } = yield select(_ => _.app)
-      if (data.success) {
-        const { from } = locationQuery
-        yield put({ type: 'app/query' })
-        if (!pathMatchRegexp('/login', from)) {
-          if (['', '/'].includes(from)) router.push('/dashboard')
-          else router.push(from)
-        } else {
-          router.push('/dashboard')
-        }
-      } else {
-        throw data
+      if (callback && typeof callback === 'function') {
+        callback(data)
       }
+      // const { locationQuery } = yield select(_ => _.app)
+      // if (data.code=='1') {
+      //   debugger
+      //   // const { from } = locationQuery
+      //   // yield put({ type: 'app/query' })
+      //   // if (!pathMatchRegexp('/login', from)) {
+      //   //   if (['', '/'].includes(from)) router.push('/dashboard')
+      //   //   else router.push(from)
+      //   // } else {
+      //     router.push('/dashboard')
+      //   // }
+      // } else {
+      //   throw data
+      // }
     },
+
+    // *initOSS({ payload, callback }, { call }) {
+    //   const { region, bucketName, response } = yield call(initOSS)
+    //   if (callback && typeof callback === 'function') {
+    //     callback(region, bucketName, response)
+    //   }
+    // },
   },
 }
