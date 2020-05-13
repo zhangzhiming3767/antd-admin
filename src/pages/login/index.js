@@ -18,18 +18,22 @@ class Login extends PureComponent {
     const { dispatch, form } = this.props
     const { validateFieldsAndScroll } = form
     validateFieldsAndScroll((errors, values) => {
-      if (errors) {
-        return
-      }
-      store.set('user',user);
-      dispatch({ type: 'login/login', payload: values,
-      callback: (res) => {
-        if(res && res.code=='1'){
-          store.set('user',res.datas);
-        }else{
-          //做全局统一异常处理
-        }
-      } })
+      debugger
+      // if (errors) {
+      //   return
+      // }
+      // store.set('user', user);
+      dispatch({
+        type: 'login/login',
+        payload: values,
+        callback: res => {
+          if (res && res.code == '1') {
+            store.set('user', res.datas)
+          } else {
+            //做全局统一异常处理
+          }
+        },
+      })
     })
   }
 

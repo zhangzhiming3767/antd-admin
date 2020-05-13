@@ -9,7 +9,7 @@ import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 import api from 'api'
 import config from 'config'
 import { transferRoutes } from 'utils/transferRoutes'
-const { queryRouteList, logoutUser, queryUserInfo,getMenuList } = api
+const { queryRouteList, logoutUser, queryUserInfo, getMenuList } = api
 
 const goDashboard = () => {
   if (pathMatchRegexp(['/', '/login'], window.location.pathname)) {
@@ -85,13 +85,13 @@ export default {
       }
       const { locationPathname } = yield select(_ => _.app)
       // const { code, datas: user} = yield call(queryUserInfo, payload)
-      let user=store.get('user');
+      let user = store.get('user')
       if (user) {
-        const { list } = yield call(queryRouteList)
-        const { code, datas: test }= yield call(getMenuList);
-        let routeList = transferRoutes(test);
-        let permissions={};
-        permissions.visit = transferRoutes(test).map(item => item.id);
+        // const { list } = yield call(queryRouteList)
+        const { code, datas: test } = yield call(getMenuList)
+        let routeList = transferRoutes(test)
+        let permissions = {}
+        permissions.visit = transferRoutes(test).map(item => item.id)
         store.set('routeList', routeList)
         store.set('permissions', permissions)
         store.set('user', user)
