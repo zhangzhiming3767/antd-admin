@@ -5,6 +5,7 @@ import { withI18n } from '@lingui/react'
 @withI18n()
 class Index extends PureComponent {
   render() {
+    //2
     const { i18n } = this.props
     return <Redirect to={i18n.t`/dashboard`} />
   }
